@@ -1,0 +1,82 @@
+---
+title: "Session 2 practice"
+author: "Eugina Leung"
+date: "4 July 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Practice with layers (Task 0)
+```{r}
+library(ggplot2)
+mpg
+g <- ggplot(mpg, aes(x = displ, y = hwy))
+g + geom_point(aes(colour = drv))
+g + geom_point() + facet_wrap(~drv)
+```
+<br />
+Practice with layers (Task 1)<br />
+============================ <br />
+*Create a plot with 1 layer: <br />
+*x mapped to displ <br />
+*y mapped to hwy <br />
+*colour mapped to trans <br />
+*geometry point <br />
+*default stat and position for point <br />
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) +geom_point(aes(colour=trans))
+ggplot(mpg, aes(x = displ, y = hwy, colour = trans)) +geom_point()
+```
+<br />
+Practice with layers (Task 2)<br />
+============================ <br />
+*Defaults for all layers:<br />
+*x →→ displ <br />
+*y →→ hwy <br />
+*Layer 1: <br />
+*geom point <br />
+*default stat and position<br />
+*point colour is set to "red" <br/>
+*Layer 2: <br/>
+*geom smooth <br/>
+*default stat and position<br/>
+*no variables mapped to colour <br/>
+```{r}
+ggplot(mpg, aes(x=displ, y = hwy))+geom_point(aes(colour="red"))+geom_smooth()
+```
+<br />
+Practice with layers (Task 3)<br />
+============================ <br />
+Defaults for all layers:<br />
+x →→ displ<br />
+y →→ hwy<br />
+colour →→ drv<br />
+Layer 1:<br />
+geom point<br />
+default stat and position<br />
+Layer 2:<br />
+geom smooth<br />
+default stat and position<br />
+pass in method='lm' to get linear (rather than LOESS) regression<br />
+pass in se=FALSE to suppress confidence bands<br />
+```{r}
+ggplot(mpg,aes(x=displ, y=hwy, colour=drv))+geom_point()+geom_smooth(method="lm", se=FALSE)
+```
+<br />
+Practice with layers (Task 4)<br />
+============================ <br />
+Defaults for all layers:<br />
+x →→ displ<br />
+y →→ hwy<br />
+colour →→ cyl (as discrete values)<br />
+Layer 1:<br />
+geom point<br />
+default stat and position<br />
+Layer 2:<br />
+geom smooth<br />
+default stat and position<br />
+```{r}
+ggplot(mpg, aes(x=displ, y=hwy, colour=factor(cyl)))+geom_point()+geom_smooth()
+```
